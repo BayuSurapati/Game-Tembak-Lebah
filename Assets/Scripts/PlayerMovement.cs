@@ -28,10 +28,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(pMoveSpeed, 0, 0) * Time.deltaTime;
+            GetComponent<Animator>().SetInteger("Mode", 1);
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             transform.position -= new Vector3(pMoveSpeed, 0, 0) * Time.deltaTime;
+            GetComponent<Animator>().SetInteger("Mode", 1);
+        }
+        else
+        {
+            GetComponent<Animator>().SetInteger("Mode", 0);
         }
     }
 
@@ -42,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         {
             GameObject Bullet = Instantiate(playerBullet, GameObject.Find("BulletFire").transform.position, Quaternion.identity);
             Bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
+
+            GameObject.Find("Shooting").GetComponent<AudioSource>().Play();
 
             Destroy(Bullet, bulletLifetime);
         }

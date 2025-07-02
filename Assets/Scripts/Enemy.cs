@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
         {
             GameObject.Find("Manager").GetComponent<Manager>().score += 1;
             //GameObject.Find("Manager").GetComponent<Manager>().SaveScore();
+            GameObject.Find("EnemyHurt").GetComponent<AudioSource>().Play();
 
             Destroy(other.gameObject);
             Destroy(this.gameObject);
